@@ -21,6 +21,11 @@ function search {
     $url = $query.Substring(0, $query.Length - 1) 
     web "$url" 
 }
+function weather {
+	$city = $args[0]
+	$response = Invoke-RestMethod -Method GET -Uri "http://api.weatherapi.com/v1/current.json?key=<WeatherAPIKEY>&q=$city&aqi=no"
+	Write-Output "Temp: $($response.current.temp_c) | Humidity: $($response.current.humidity)"
+}
 function path { $($env:path).split(";") }
 
 . C:\Users\abhik\Documents\dev-env\powershell\GitAutomation\New-Repo.ps1
